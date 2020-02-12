@@ -1,0 +1,32 @@
+﻿@page "/"
+@namespace ChatClient.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ChatClient</title>
+    <base href="~/" />
+</head>
+<body>
+    <app>
+        <component type="typeof(App)" render-mode="ServerPrerendered" />
+    </app>
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        @*<environment include="Development">
+
+        </environment>*@
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+</body>
+</html>

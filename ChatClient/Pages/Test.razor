@@ -1,0 +1,23 @@
+﻿@page "/test"
+
+
+    <div>
+        <form>
+            <label>Your name:</label><input type="text"/>
+            <label>Message:</label><textarea></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+@code {
+    public class User
+    {
+        public Guid Id { get; set; }
+
+        public string Name { get; set; }
+    }
+}
+
+@functions{
+   
+}
