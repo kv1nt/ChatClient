@@ -1,12 +1,12 @@
 ﻿@page "/test"
 
 
-    <div>
-        <form>
-            <label>Your name:</label><input type="text"/>
-            <label>Message:</label><textarea></textarea>
-            <button type="submit">Send</button>
-        </form>
+    <div class="main-container">
+        <label>Your name:</label><input type="text" @bind="@userName" />
+        <label>Message:</label><textarea @bind="@message"></textarea>
+        <button @onclick="@Run">Send</button>
+        <br />
+        <label>@result</label>
     </div>
 
 @code {
@@ -18,6 +18,15 @@
     }
 }
 
-@functions{
-   
+@functions {
+
+    string userName;
+    string message;
+    string result;
+
+    public  void Run()
+    {
+      
+        result = "Name: " + userName + "Msg: " + message;
+    }
 }
