@@ -1,21 +1,26 @@
 ﻿@page "/test"
 
-
     <div class="main-container">
-        <label>Your name:</label><input type="text" @bind="@userName" />
-        <label>Message:</label><textarea @bind="@message"></textarea>
-        <button @onclick="@Run">Send</button>
-        <br />
-        <label>@result</label>
+        <label>Your name:</label>
+        <input type="text" @bind="@userName" />
+        <div class="dropdown">
+            <label>Your name:</label>
+            <select @bind="@person">
+                @foreach (var item in @LoadUsers())
+                {
+                    <option>@item.Name</option>
+                }
+            </select>
+        </div>
+        <label>Message:</label>
+        <textarea @bind="@message"></textarea>
+            <button @onclick="@Run">Send</button>
+            <br />
+            <div class="result-view">@result</div>
     </div>
 
 @code {
-    public class User
-    {
-        public Guid Id { get; set; }
-
-        public string Name { get; set; }
-    }
+   
 }
 
 @functions {
@@ -23,10 +28,13 @@
     string userName;
     string message;
     string result;
+    string person;
 
-    public  void Run()
-    {
-      
-        result = "Name: " + userName + "Msg: " + message;
-    }
+    UserRepository userRepository = new UserRepository();
+
+    void Run() { userRepository.Create(new User { Name = userName }); }
+
+    IEnumerable<User> LoadUsers() => userRepository.GetAll();
+
 }
+

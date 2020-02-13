@@ -12,15 +12,13 @@ namespace ChatClient.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Message> Messages { get; set; }
 
-        public ChatContext(DbContextOptions<ChatContext> options)
-            : base(options)
+        public ChatContext()
         {
-            //Database.EnsureCreated();
+            Database.EnsureCreated();
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ChatDB;Trusted_Connection=True;MultipleActiveResultSets=true");
         }
     }
 }

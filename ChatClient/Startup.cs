@@ -27,7 +27,8 @@ namespace ChatClient
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.ConfigureSqlContext(Configuration);
+            //services.ConfigureSqlContext(Configuration);
+            //services.ConfigureRepositoryWrapper();
             //services.CreateSocketServer();
             //services.AddSingleton<WeatherForecastService>();
         }

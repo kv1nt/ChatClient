@@ -1,4 +1,6 @@
 ﻿using ChatClient.Context;
+using ChatClient.Models;
+using ChatClient.Repository;
 using ChatClient.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +31,11 @@ namespace ChatClient.Extentions
                     .AllowAnyMethod()
                     .AllowAnyHeader());
             });
+        }
+
+        public static void ConfigureRepositoryWrapper(this IServiceCollection services)
+        {
+            //services.AddScoped<IRepository<User>, UserRepository>();
         }
 
         [Obsolete]
