@@ -1,38 +1,53 @@
-﻿@page "/test"
-
-    <div class="main-container">
-        <label>Your name:</label>
-        <input type="text" @bind="@userName" />
-        <div class="dropdown">
-            <label>Your name:</label>
-            <select @bind="@person">
-                @foreach (var item in @LoadUsers())
-                {
-                    <option>@item.Name</option>
-                }
-            </select>
-        </div>
-        <label>Message:</label>
-        <textarea @bind="@message"></textarea>
-            <button @onclick="@Run">Send</button>
-            <br />
-            <div class="result-view">@result</div>
+﻿@page "/chat"
+<div class="main-container">
+    <div class="dropdown">
+        <label>Choose Person:</label>
+        <select @bind="@PersonName">
+            @foreach (var item in @LoadUsers())
+            {
+                <option value="@getUserId(item.Id)">@item.Name</option>
+            }
+        </select>
     </div>
+    <label>Message:</label>
+    <textarea @bind="@Message"></textarea>
+    <button @onclick="@Send">Send</button>
+</div>
+<ChatWindow />
+
+
 
 @code {
-   
-}
 
-@functions {
+    public string UserName { get; set; }
 
-    string userName;
-    string message;
-    string result;
-    string person;
+    public string Message { get; set; }
+
+    public string PersonName { get; set; }
+
+    public Guid RecipientId { get; set; }
+
 
     UserRepository userRepository = new UserRepository();
+    MessageRepository msgRepository = new MessageRepository();
 
-    void Run() { userRepository.Create(new User { Name = userName }); }
+    object getUserId(Guid id)
+    {
+        RecipientId = id;
+        return id;
+    }
+
+
+
+    void Send()
+    {
+        userRepository.Create(new User { Name = UserName });
+        msgRepository.Create(new Message()
+        {
+            MessageText = Message,
+            RecipientId = RecipientId.ToString()
+        });
+    }
 
     IEnumerable<User> LoadUsers() => userRepository.GetAll();
 

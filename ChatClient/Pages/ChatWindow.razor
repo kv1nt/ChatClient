@@ -1,0 +1,32 @@
+﻿<div class="chat-window">
+    @{
+        int i = 0;
+
+        foreach (var msg in @GetAllMessages().Result)
+        {
+            <div class="container @(i % 2 == 0 ? "darker" : "")">
+                <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;">
+                <p>@msg.MessageText</p>
+                <span class="time-right">
+                    @msg.TimeMsgCreated.ToShortDateString()
+                    @msg.TimeMsgCreated.ToShortTimeString()
+                </span>
+            </div>
+            i++;
+        }
+    }
+</div>
+
+@code {
+
+
+
+    async Task<IEnumerable<Message>> GetAllMessages()
+    {
+        using (MessageRepository msgRepository = new MessageRepository())
+        {
+            return await Task.FromResult(msgRepository.GetAll());
+        }
+    }
+
+}

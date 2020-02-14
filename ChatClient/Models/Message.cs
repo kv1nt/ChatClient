@@ -15,6 +15,7 @@ namespace ChatClient.Models
         public string UserId { get; set; }
         public string RecipientId { get; set; }
         public string MessageText { get; set; }
+        public DateTime TimeMsgCreated { get; set; }
     }
 }
 

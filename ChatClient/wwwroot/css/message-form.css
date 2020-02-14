@@ -1,10 +1,11 @@
 ﻿.main-container {
     width: 17%;
     padding: 1%;
-    background-color: #7ab9b9;
+    background-color:#ddd;
     border-radius: 1%;
-    position: absolute;
-    margin: 5%;
+    margin: 1%;
+    display: inline-block;
+    border: #ccc;
 }
 
 input[type=text] {

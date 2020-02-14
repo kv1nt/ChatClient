@@ -1,0 +1,22 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager;
+
+<div class="create-user-form">
+    <label>Your name:</label>
+    <input type="text" @bind="@UserName" />
+    <button @onclick="@CreateNewUser">Crete New User</button>
+</div>
+
+
+
+@code {
+    public string UserName { get; set; }
+
+    UserRepository userRepository = new UserRepository();
+
+    void CreateNewUser() {
+        userRepository.Create(new User { Name = UserName });
+        NavigationManager.NavigateTo("chat");
+    }
+}
+

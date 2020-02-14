@@ -1,0 +1,32 @@
+﻿.create-user-form {
+    width: 17%;
+    padding: 1%;
+    background-color: #ddd;
+    border-radius: 1%;
+    margin: 1%;
+    margin-top: 15%;
+    margin-left: 39%;
+    border: #ccc;
+}
+
+input[type=text] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #FF9800;
+    border: none;
+    color: white;
+    padding: 5px 25px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+}
