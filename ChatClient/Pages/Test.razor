@@ -13,8 +13,8 @@
     <textarea @bind="@Message"></textarea>
     <button @onclick="@Send">Send</button>
 </div>
-<ChatWindow />
-
+<ChatWindow OnLoad="ClickHandler"></ChatWindow>
+<p>@message</p>
 
 
 @code {
@@ -26,6 +26,8 @@
     public string PersonName { get; set; }
 
     public Guid RecipientId { get; set; }
+
+    string message = "Hello from ParentComponent";
 
 
     UserRepository userRepository = new UserRepository();
@@ -50,6 +52,11 @@
     }
 
     IEnumerable<User> LoadUsers() => userRepository.GetAll();
+
+    void ClickHandler(string newMessage)
+    {
+        message = newMessage;
+    }
 
 }
 

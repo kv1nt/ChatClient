@@ -2,9 +2,9 @@
     @{
         int i = 0;
 
-        foreach (var msg in @GetAllMessages().Result)
+        foreach (var msg in @GetAllMessages())
         {
-            <div class="container @(i % 2 == 0 ? "darker" : "")">
+            <div class="container @(i % 2 == 0 ? "darker" : "")" @onload="@(() => OnLoad.InvokeAsync("Hello from ChildComponent"))" >
                 <img src="/w3images/bandmember.jpg" alt="Avatar" style="width:100%;">
                 <p>@msg.MessageText</p>
                 <span class="time-right">
@@ -18,15 +18,14 @@
 </div>
 
 @code {
+    [Parameter] public EventCallback<string> OnLoad { get; set; } 
 
-
-
-    async Task<IEnumerable<Message>> GetAllMessages()
+    MessageRepository msgRepository = new MessageRepository();
+    IEnumerable<Message> GetAllMessages()
     {
-        using (MessageRepository msgRepository = new MessageRepository())
-        {
-            return await Task.FromResult(msgRepository.GetAll());
-        }
+
+        return msgRepository.GetAll();
+
     }
 
 }
