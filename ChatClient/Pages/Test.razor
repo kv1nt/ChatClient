@@ -1,21 +1,22 @@
 ﻿@page "/chat"
-<div class="main-container">
-    <div class="dropdown">
-        <label>Choose Person:</label>
-        <select @bind="@PersonName">
-            @foreach (var item in @LoadUsers())
-            {
-                <option value="@getUserId(item.Id)">@item.Name</option>
-            }
-        </select>
-    </div>
-    <label>Message:</label>
-    <textarea @bind="@Message"></textarea>
-    <button @onclick="@Send">Send</button>
-</div>
-<ChatWindow OnLoad="ClickHandler"></ChatWindow>
-<p>@message</p>
+        <div class="main-container">
+            <div class="dropdown">
+                <label>Choose Person:</label>
+                <select @onchange="@DoStuff">
+                    <option></option>
+                    @foreach (var item in @LoadUsers())
+                    {
+                        <option value="@getUserId(item.Id)">@item.Name</option>
+                    }
 
+                </select>
+            </div>
+            <label>Message:</label>
+            <textarea @bind="@Message"></textarea>
+            <button @onclick="@Send">Send</button>
+        </div>
+        <ChatWindow OnLoad="ClickHandler" Value="@RecipientId"></ChatWindow>
+<p>@message</p>
 
 @code {
 
@@ -27,7 +28,7 @@
 
     public Guid RecipientId { get; set; }
 
-    string message = "Hello from ParentComponent";
+    string message = "";
 
 
     UserRepository userRepository = new UserRepository();
@@ -35,15 +36,19 @@
 
     object getUserId(Guid id)
     {
-        RecipientId = id;
+
         return id;
     }
 
 
+    void DoStuff(ChangeEventArgs e)
+    {
+        RecipientId = Guid.Parse(e.Value.ToString());
+    }
+
 
     void Send()
     {
-        userRepository.Create(new User { Name = UserName });
         msgRepository.Create(new Message()
         {
             MessageText = Message,

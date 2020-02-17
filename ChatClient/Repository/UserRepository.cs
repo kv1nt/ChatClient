@@ -11,22 +11,31 @@ namespace ChatClient.Repository
     {
         private ChatContext _chatContext = new ChatContext();
 
-        public void Create(User user)
+        public bool Create(User user)
         {
-            _chatContext.Users.Add(new User()
+            var existsUser = _chatContext.Users.FirstOrDefault(x => x.Name == user.Name && x.Password == user.Password);
+            if (existsUser == null)
             {
-                Id = Guid.NewGuid(),
-                Name = user.Name
-            });
-            _chatContext.SaveChanges();
+                _chatContext.Users.Add(new User()
+                {
+                    Id = user.Id,
+                    Name = user.Name,
+                    Password = user.Password
+                });
+                _chatContext.SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+           
         }
 
         public User Get(Guid id) => _chatContext.Users.First(x => x.Id == id);
-
         public IEnumerable<User> GetAll() => _chatContext.Users.ToList();
-
+        public IEnumerable<User> GetAllByUserId(string id) => _chatContext.Users.Where(x => x.Id == Guid.Parse(id));
         public void Delete(User user) { _chatContext.Users.Remove(user); }
-
         public void Update(User user) { _chatContext.Users.Update(user); }
     }
 }
