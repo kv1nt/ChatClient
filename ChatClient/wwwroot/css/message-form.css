@@ -1,11 +1,12 @@
 ﻿.main-container {
     width: 17%;
     padding: 1%;
-    background-color:#ddd;
+    background-color: #ddd;
     border-radius: 1%;
     margin: 1%;
     display: inline-block;
     border: #ccc;
+    position: fixed;
 }
 
 input[type=text] {

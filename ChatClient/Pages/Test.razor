@@ -3,7 +3,7 @@
             <div class="dropdown">
                 <label>Choose Person:</label>
                 <select @onchange="@DoStuff">
-                    <option></option>
+                   
                     @foreach (var item in @LoadUsers())
                     {
                         <option value="@getUserId(item.Id)">@item.Name</option>
@@ -43,7 +43,7 @@
 
     void DoStuff(ChangeEventArgs e)
     {
-        RecipientId = Guid.Parse(e.Value.ToString());
+        RecipientId = Guid.Parse(e.Value?.ToString());
     }
 
 

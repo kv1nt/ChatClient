@@ -1,6 +1,7 @@
 ﻿@page "/"
 @inject NavigationManager NavigationManager;
 
+
     <div class="create-user-form">
         <label>Your name:</label>
         <input type="text" @bind="@UserName" />
@@ -21,14 +22,14 @@
     void ErrorMsg()
     {
         ErrorText = "This User Exists";
-        isLoginBtnHidden = "blick";
+        isLoginBtnHidden = "block";
     }
 
     UserRepository userRepository = new UserRepository();
 
     void CreateNewUser() {
         var isCreated =  userRepository.Create(new User { Id = Guid.NewGuid(), Name = UserName, Password = this.Password });
-        if (isCreated) NavigationManager.NavigateTo("chat/");
+        if (isCreated) NavigationManager.NavigateTo("chat");
         else ErrorMsg();
     }
 
