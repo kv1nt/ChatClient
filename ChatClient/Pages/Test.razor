@@ -5,9 +5,9 @@
                 <select @onchange="@DoStuff">
                    
                     @foreach (var item in @LoadUsers())
-                    {
+                     {
                         <option value="@getUserId(item.Id)">@item.Name</option>
-                    }
+                     }
 
                 </select>
             </div>

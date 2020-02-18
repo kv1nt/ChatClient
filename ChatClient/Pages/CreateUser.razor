@@ -28,8 +28,8 @@
     UserRepository userRepository = new UserRepository();
 
     void CreateNewUser() {
-        var isCreated =  userRepository.Create(new User { Id = Guid.NewGuid(), Name = UserName, Password = this.Password });
-        if (isCreated) NavigationManager.NavigateTo("chat");
+        var isExists =  userRepository.Create(new User { Id = Guid.NewGuid(), Name = UserName, Password = this.Password });
+        if (isExists) NavigationManager.NavigateTo("chat");
         else ErrorMsg();
     }
 
